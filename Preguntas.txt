@@ -1,0 +1,11 @@
+- El algoritmo ejecuta simulaciones y no para hasta que llega a un max_play que definimos en el comando pero...tenemos que pararlo cuando llegue a un estado final, ¿verdad? 
+(Despues de hacer un open sigue funcionando)
+
+- El algoritmo que usamos realiza una simulacion y finalmente nos muestra el reward final y el numero de pasos pero...¿necesitamos implementar una funcion que reuna un nº determinado de simulaciones y de entre ellas escoja la mejor? O... vale con que hagamos un número de simulaciones y se vean las que sean buenas y malas y ya esta?
+
+- El problema del tigre funciona aparentemente, pero el del tag no sabemos como interpretar los estados del documento, no sabemos a que casillas se corresponden.
+
+- Es estrictamente necesario implementar una interfaz de usuario? Vale permitir el tipo de simulacion por comandos en la consola?
+
+- ¿Qué es el "discount" en los archivos .POMPD?
+
