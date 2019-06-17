@@ -93,6 +93,7 @@ class PomdpRunner:
             total_rewards += reward
             budget -= cost
 
+            # Tiger problem ----------------------------------------------------------------
             # When the open action is selected, the tiger problem will end, either the person scapes or is eaten by the tiger, so it has to stop.
             if "Tiger-2DFIXED.POMDP" in environment:
                 if params.benchmark == 0:
@@ -112,6 +113,26 @@ class PomdpRunner:
                         '=' * 20
                     ]))
 
+            #Tag problem ----------------------------------------------------------------
+            # When the catch action is selected and the two robots are in the same cell, the tag problem will end so it has to stop.
+            if "Tag.POMDP" in environment:
+                if params.benchmark == 0:
+                    if "tagged" in model.curr_state:
+                        log.info('\n'.join([
+                            'Taking action: {}'.format(action),
+                            'Observation: {}'.format(obs),
+                            'Reward: {}'.format(reward),
+                            '=' * 20
+                        ]))
+                        break;
+                    log.info('\n'.join([
+                        'Taking action: {}'.format(action),
+                        'Observation: {}'.format(obs),
+                        'Reward: {}'.format(reward),
+                        'New state: {}'.format(new_state),
+                        'New Belief: {}'.format(belief),
+                        '=' * 20
+                    ]))
         # Printing the total steps and reward when the loop ends.
         if params.benchmark == 0:
             log.info('Simulation ended after {} steps. Total reward = {}'.format(i + 1, total_rewards))
@@ -166,9 +187,7 @@ class PomdpRunner:
             total_rewards += reward
             budget -= cost
 
-
-
-            if "open" in action:
+            if "open" in action or "tagged" in model.curr_state:
                 log.info('Ended simulation after {} steps. Total reward = {}'.format(i + 1, total_rewards))
                 self.step_list.append(i+1)
                 self.fReward_list.append(total_rewards)
@@ -176,6 +195,7 @@ class PomdpRunner:
                 self.fReward += total_rewards
 
                 break;
+
             # Printing the details for every step of the interactive simulation
             # log.info('\n'.join([
             #   'Taking action: {}'.format(action),

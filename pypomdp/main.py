@@ -25,7 +25,7 @@ if __name__ == '__main__':
     parser.add_argument('--logfile', type=str, default=None, help='Logfile path')
     parser.add_argument('--random_prior', type=bool, default=False,
                         help='Whether or not to use a randomly generated distribution as prior belief, default to False')
-    parser.add_argument('--max_play', type=int, default=100, help='Maximum number of play steps')
+    parser.add_argument('--max_play', type=int, default=1000, help='Maximum number of play steps')
     parser.add_argument('--benchmark', type=int, default=0, help='Sets the simulation to benchmark type, if present, must be followed of either "1" or "True"')
 
     args = vars(parser.parse_args())
