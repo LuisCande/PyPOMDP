@@ -1,9 +1,10 @@
-- Tenemos que pararlo cuando llegue a un estado final, �verdad?
-(Despues de hacer un open sigue funcionando)
+- En el problema del Tag si está en la casilla 26 permite hacer las acciones North y West pero esto hace que el algoritmo tarde mucho en resolverlo
 
-- Necesitamos implementar una funcion que reuna un n� determinado de simulaciones y de entre ellas escoja la mejor? O... vale con que hagamos un n�mero de simulaciones y se vean las que sean buenas y malas y ya esta?
+- El algoritmo pbvi que resuelve le problema del Tag no funciona, llega hasta el solve y no hace nada ni da error en la consola
+
+- En caso de que no seamos capaces de solucionarlo, influye en nota si se resuelve SOLO con uno de los dos algoritmos (PBVI / POMCP)?
 
 - Es estrictamente necesario implementar una interfaz de usuario? Vale permitir el tipo de simulacion por comandos en la consola?
 
-- �Qu� es el "discount" en los archivos .POMDP?
+- Que es el "discount" en los archivos .POMDP?
 
