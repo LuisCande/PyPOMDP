@@ -147,7 +147,7 @@ class POMCP(Solver):
             n += 1
             state = self.tree.root.sample_state()
             self.simulate(state, max_depth=T, h=self.tree.root.h, budget=self.tree.root.budget)
-        log.info('# Simulation = {}'.format(n))
+        log.info('# Step = {}'.format(n))
 
     def get_action(self, belief):
         """
