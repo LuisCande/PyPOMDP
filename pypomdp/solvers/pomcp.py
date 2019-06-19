@@ -83,11 +83,12 @@ class POMCP(Solver):
         if depth > max_depth or budget <= 0:
             return 0
 
+
         ai = rand_choice(self.model.get_legal_actions(state))
         sj, oj, r, cost = self.model.simulate_action(state, ai)
 
         return r + self.model.discount * self.rollout(sj, h + [ai, oj], depth + 1, max_depth, budget-cost)
-        
+
     def simulate(self, state, max_depth, depth=0, h=[], parent=None, budget=None):
         """
         Perform MCTS simulation on a POMCP belief search tree

@@ -93,9 +93,20 @@ class PomdpRunner:
             total_rewards += reward
             budget -= cost
 
+            # Printing the details for every step of the interactive simulation
+            log.info('\n'.join([
+                'Taking action: {}'.format(action),
+                'Observation: {}'.format(obs),
+                'Reward: {}'.format(reward),
+                'Budget: {}'.format(budget),
+                'New state: {}'.format(new_state),
+                'New Belief: {}'.format(belief),
+                '=' * 20
+            ]))
+
             # Tiger problem ----------------------------------------------------------------
             # When the open action is selected, the tiger problem will end, either the person scapes or is eaten by the tiger, so it has to stop.
-            if "Tiger-2DFIXED.POMDP" in environment:
+            if "Tiger-2D.POMDP" in environment:
                 if params.benchmark == 0:
                     if "open" in action:
                         log.info('\n'.join([
@@ -130,9 +141,10 @@ class PomdpRunner:
                         'Observation: {}'.format(obs),
                         'Reward: {}'.format(reward),
                         'New state: {}'.format(new_state),
-                        'New Belief: {}'.format(belief),
+                        #'New Belief: {}'.format(belief),
                         '=' * 20
                     ]))
+
         # Printing the total steps and reward when the loop ends.
         if params.benchmark == 0:
             log.info('Simulation ended after {} steps. Total reward = {}'.format(i + 1, total_rewards))
