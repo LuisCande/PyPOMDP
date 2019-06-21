@@ -4,26 +4,43 @@ discount: 0.75
 values: reward
 states: left middle right goal
 actions: w0 e0 
-observations: nothing goal
+observations: nothing goaling
 
-start: 0.333333 0.333333 0.333333 0.0
+start: 0.333 0.333 0.333 0.001
 
 T: w0
-0.9 0.1 0.0 0.0 
-0.9 0.0 0.0 0.1 
-0.0 0.0 0.1 0.9 
-0.333333 0.333333 0.333333 0.0
+0.9 0.1 0 0
+0.9 0 0 0.1
+0 0 0.1 0.9
+0.333 0.333 0.333 0.001
 
 T: e0
-0.1 0.9 0.0 0.0 
-0.1 0.0 0.0 0.9 
-0.0 0.0 0.9 0.1 
-0.333333 0.333333 0.333333 0.0
+0.1 0.9 0 0
+0.1 0 0 0.9
+0 0 0.9 0.1
+0.333 0.333 0.333 0.001
 
-O: * 
-1.0 0.0 
-1.0 0.0 
-1.0 0.0 
-0.0 1.0 
+R: * : * : * : * -1
 
-R: * : * : goal : goal 1.0
+O: w0 : left : nothing 1
+O: w0 : left : goaling 0
+O: w0 : middle : nothing 1
+O: w0 : middle : goaling 0
+O: w0 : right : nothing 1
+O: w0 : right : goaling 0
+O: w0 : goal : nothing 0
+O: w0 : goal : goaling 1
+
+O: e0 : left : nothing 1
+O: e0 : left : goaling 0
+O: e0 : middle : nothing 1
+O: e0 : middle : goaling 0
+O: e0 : right : nothing 1
+O: e0 : right : goaling 0
+O: e0 : goal : nothing 0
+O: e0 : goal : goaling 1
+
+
+
+
+

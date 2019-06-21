@@ -1,114 +1,92 @@
-# Simple example based upon the WWW
-
-# Scenario: You have a web site which offers a range of products and
-# you want to tailor the products offered or advertised to the type of
-# person that is visiting your site.  You do not want to interfere
-# with their browsing, so the only clues to their personality are the
-# products they seem to be interested in.
+# Simple two state example that runs through my proposal and thesis.
+# This is a thinly disguised version of the tiger problem, though not
+# as symetric.
 
 values: reward
 discount: 0.95
-states: S1 S2 SN SX
 
-# person is type 1
-# person is type 2
-# person is somewhere in between the two types
-# nobody connected
+# There are two types of people that visit our web site
+states: executive teenager
 
-actions: A1 A2 AN
+# We can either go for the hard sell of either ties or skates or
+# watch what type of interests they have by the pages they access.
+actions: monitor adv-ties adv-skates
 
-# advertise type 1 products
-# advertise type 2 products
-# advertise neutral products
+# Our web pages are either golf related items or videogames related
+# items.
+observations: golf videogames
 
-observations: O1 O2 ON OB OX
-
-# page selected is type 1
-# page selected is type 2
-# page selected is type 3
-# person buys a product
-# person leaves the site
-
-# Start state
-start_state: SX
+# 7 out of 10 people that visit the web are teens.
+start: 0.3 0.7
 
 ######################################################################
-# State transitions
+# State Transitions
 
-# If no one is at the web site, then the next person to visit is
-# equally likely to be of a certain type
-T: * : SX : S1 0.3333333333333
-T: * : SX : S2 0.3333333333333
-T: * : SX : SN 0.3333333333333
+# Monitoring doesn't change who is at the site.  We assume they will
+# stay there as long as we just monitor.
+T: monitor
+identity
 
-# S1: If you advertise products of interest then they are more likely 
-# to stay than if you advertise uninteresting products.
-T: A1 : S1 : S1   0.80
-T: A1 : S1 : SX   0.2
+# Once we decide to advertise a product, it either sells or it
+# doesn't, and regardless we are done with this customer and we
+# get a different customer.  We assume that 7 out of 10 visitors
+# to the web site are teenagers.
+T: adv-ties
+0.3 0.7
+0.3 0.7
 
-T: A2 : S1 : S1   0.5
-T: A2 : S1 : SX   0.5
-
-T: AN : S1 : S1   0.66666667
-T: AN : S1 : SX   0.33333333
-
-# S2: If you advertise products of interest then they are more likely 
-# to stay than if you advertise uninteresting products.
-T: A1 : S2 : S2   0.5
-T: A1 : S2 : SX   0.5
-
-T: A2 : S2 : S2   0.80
-T: A2 : S2 : SX   0.2
-
-T: AN : S2 : S2   0.66666667
-T: AN : S2 : SX   0.33333333
-
-# SN: 
-T: A1 : SN : SN   0.5
-T: A1 : SN : SX   0.5
-
-T: A2 : SN : SN   0.5
-T: A2 : SN : SX   0.5
-
-T: AN : SN : SN   0.75
-T: AN : SN : SX   0.25
-
+T: adv-skates
+0.3 0.7
+0.3 0.7
 
 ######################################################################
-# Observation probabilities
+# Observation Probabilities
 
-# Deterministic observation of a disconnection
-O: * : SX : OX   1.0
+# Assume 7 out of 10 executives look at golf product pages
+O: monitor : executive : golf
+0.7
 
-# S1: More likely to look at products in their own interest
-O: * : S1 : O1   0.65
-O: * : S1 : O2   0.1
-O: * : S1 : ON   0.2
+O: monitor : executive : videogames
+0.3
 
-# S1: They'll buy a product with some probability, so the longer you
-# keep them at the site, the more chance there is they will buy.
-O: * : S1 : OB   0.05
+# Assumes that only 1 out of 10 teenagers look at the golf web # pages
+O: monitor : teenager : golf
+0.1
 
-# S2: More likely to look at products in their own interest
-O: * : S2 : O1   0.1
-O: * : S2 : O2   0.65
-O: * : S2 : ON   0.2
+O: monitor : teenager : videogames
+0.9
 
-# S1: They'll buy a product with some probability, so the longer you
-# keep them at the site, the more chance there is they will buy.
-O: * : S2 : OB   0.05
+O: adv-ties
+uniform
 
-# SN: More likely to look at products in their own interest
-O: * : SN : O1   0.2
-O: * : SN : O2   0.2
-O: * : SN : ON   0.55
-
-# SN: They'll buy a product with some probability, so the longer you
-# keep them at the site, the more chance there is they will buy.
-O: * : SN : OB   0.05
+O: adv-skates
+uniform
 
 ######################################################################
-# Rewards
+# Immediate Rewards
 
-R: * : * : * : OB  1.0
+# Monitoring will cost us nothing but our daily operating costs which
+# we set to be 10 cents per time step
+R: monitor : teenager : * : *
+-0.10
 
+R: monitor : executive : * : *
+-0.10
+
+# Assume that a tie have a profit of $10 and half of the executives,
+# when given the ad, will buy one.
+R: adv-ties : executive : * : *
+1.0
+
+# Assume that no teenagers will buy the ties.
+R: adv-ties : teenager : * : *
+-6.0
+
+# Assume that skates have a profit of $20 and that 1 out of 50
+# executives will buy them.
+R: adv-skates : executive : * : *
+-4.60
+
+# Assume that 3 out of 10 teens will buy the skates
+R: adv-skates : teenager : * : *
+2.0

@@ -27,8 +27,6 @@ actions: no-repair-and-no-inspect no-repair-and-visual-inspect no-repair-and-ut-
 #	visual-inspect
 #	ut-inspect
 
-
-
 observations: 5
 
 ######################################################################
