@@ -44,11 +44,11 @@ if __name__ == '__main__':
                 '+'*20,
                 'Results after ending {} simulations:'.format(params.benchmark),
                 '='*20,
-                'Final reward: {}'.format(runner.fReward),
                 'Total steps: {}'.format(runner.steps),
+                'Final reward: {}'.format(runner.fReward),
                 '='*5 + ' Analysing results ' + '='*5,
+                'Average steps: {}'.format(runner.steps / params.benchmark),
                 'Average reward: {}'.format(runner.fReward/params.benchmark),
-                'Average steps: {}'.format(runner.steps/params.benchmark),
                 'Standard deviation of the steps: {}'.format(statistics.stdev(runner.step_list)),
                 'Standard deviation of the reward: {}'.format(statistics.stdev(runner.fReward_list)),
                 '=' * 20

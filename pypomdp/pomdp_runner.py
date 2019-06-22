@@ -107,7 +107,6 @@ class PomdpRunner:
             # Tiger problem ----------------------------------------------------------------
             # When the open action is selected, the tiger problem will end, either the person scapes or is eaten by the tiger, so it has to stop.
             if "Tiger-2D.POMDP" in environment:
-                if params.benchmark == 0:
                     if "open" in action:
                         log.info('\n'.join([
                             'Taking action: {}'.format(action),
