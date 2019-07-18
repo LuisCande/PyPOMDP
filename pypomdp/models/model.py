@@ -123,8 +123,8 @@ class Model(object):
         #         if horiz == 9:
         #             #del f_actions[2]
         #             f_actions.remove('East')
-
-            # return f_actions
+        #
+        #     return f_actions
 
         return self.actions
 

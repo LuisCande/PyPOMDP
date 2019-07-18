@@ -219,8 +219,7 @@ class POMCP(Solver):
 
             # re-compute the current belief distribution after reinvigoration
             new_belief =  self.compute_belief()
-            #TODO Antonio, esto sale cuando se ejecutas el benchmark del Tag en pomcp y no se que hacer con el jeje
-            log.info(('*** {} random particles are added ***'.format(len(mutations))))
+            #log.info(('*** {} random particles are added ***'.format(len(mutations))))
         return new_belief
 
     def draw(self, beliefs):

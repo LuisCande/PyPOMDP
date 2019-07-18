@@ -7,8 +7,10 @@ from logger import Logger as log
 
 class PomdpRunner:
 
+    #Creating variables to compute total steps and reward
     steps = 0
     fReward = 0
+    # Creating variables to compute stdev of steps and reward
     step_list = []
     fReward_list = []
 
@@ -142,28 +144,27 @@ class PomdpRunner:
                         '=' * 20
                     ]))
 
-            if "Noisy.POMDP" in environment:
-                if params.benchmark == 0:
-                     if "goal" in new_state:
-                        log.info('\n'.join([
-                            'Taking action: {}'.format(action),
-                            'Observation: {}'.format(obs),
-                            'Reward: {}'.format(reward),
-                            'New state: {}'.format(new_state),
-                             '=' * 20
-                        ]))
-                        break;
-                     log.info('\n'.join([
+            # Islands problem ----------------------------------------------------------------
+            # When the arrive action is selected, the islands problem will end, either the tripulation finds a treasure or they die horribly to the creatures in the island.
+            if "Islands.POMDP" in environment:
+                if "arrive" in action:
+                    log.info('\n'.join([
                         'Taking action: {}'.format(action),
                         'Observation: {}'.format(obs),
                         'Reward: {}'.format(reward),
-                        'New Belief: {}'.format(belief),
-                        'New state: {}'.format(new_state),
                         '=' * 20
                     ]))
+                    break;
+                log.info('\n'.join([
+                    'Taking action: {}'.format(action),
+                    'Observation: {}'.format(obs),
+                    'Reward: {}'.format(reward),
+                    'New Belief: {}'.format(belief),
+                    '=' * 20
+                ]))
 
             #Tag problem ----------------------------------------------------------------
-            # When the catch action is selected and the two robots are in the same cell, the tag problem will end so it has to stop.
+            # When the status is tagger, the robot s will catch robot t, the tag problem will end so it has to stop.
             if "Tag.POMDP" in environment:
                 if params.benchmark == 0:
                     if "tagged" in model.curr_state:
@@ -237,7 +238,8 @@ class PomdpRunner:
             total_rewards += reward
             budget -= cost
 
-            if "open" in action or "tagged" in model.curr_state or "adv" in action:
+            #Computing final results when a problem stops
+            if "open" in action or "tagged" in model.curr_state or "adv" in action or "arrive" in action:
                 log.info('Ended simulation after {} steps. Total reward = {}'.format(i + 1, total_rewards))
                 self.step_list.append(i+1)
                 self.fReward_list.append(total_rewards)

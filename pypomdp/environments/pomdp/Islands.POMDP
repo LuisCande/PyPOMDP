@@ -1,0 +1,116 @@
+# This is the islands problem in the new pomdp
+# format.  This format is still experimental and subject to change
+
+discount: 0.75
+values: reward
+states: treasure-left-town-mid treasure-left-town-right treasure-mid-town-left treasure-mid-town-right treasure-right-town-left treasure-right-town-mid
+actions: look-left look-mid look-right arrive-left arrive-mid arrive-right
+observations: treasure-left treasure-mid treasure-right
+
+T: look-left
+identity
+
+T: look-mid
+identity
+
+T: look-right
+identity
+
+T: arrive-left
+uniform
+
+T: arrive-mid
+uniform
+
+T: arrive-right
+uniform
+
+O: look-left
+0.65 0.2 0.15
+0.65 0.2 0.15
+0.225 0.55 0.225
+0.225 0.55 0.225
+0.15 0.325 0.525
+0.15 0.325 0.525
+
+O: look-mid
+0.65 0.2 0.15
+0.65 0.2 0.15
+0.1 0.8 0.1
+0.1 0.8 0.1
+0.175 0.2 0.625
+0.175 0.2 0.625
+
+O: look-right
+0.5 0.325 0.175
+0.5 0.325 0.175
+0.15 0.625 0.225
+0.15 0.625 0.225
+0.1 0.2 0.7
+0.1 0.2 0.7
+
+O: arrive-left
+0.65 0.2 0.15
+0.65 0.2 0.15
+0.225 0.55 0.225
+0.225 0.55 0.225
+0.15 0.325 0.525
+0.15 0.325 0.525
+
+O: arrive-mid
+0.65 0.2 0.15
+0.65 0.2 0.15
+0.1 0.8 0.1
+0.1 0.8 0.1
+0.175 0.2 0.625
+0.175 0.2 0.625
+
+O: arrive-right
+0.5 0.325 0.175
+0.5 0.325 0.175
+0.15 0.625 0.225
+0.15 0.625 0.225
+0.1 0.2 0.7
+0.1 0.2 0.7
+
+R: look-left : treasure-left-town-mid : * : * -1
+R: look-left : treasure-left-town-right : * : * -1
+R: look-left : treasure-mid-town-left : * : * -1
+R: look-left : treasure-mid-town-right : * : * -1
+R: look-left : treasure-right-town-left : * : * -1
+R: look-left : treasure-right-town-mid : * : * -1
+
+R: look-mid : treasure-left-town-mid : * : * -1
+R: look-mid : treasure-left-town-right : * : * -1
+R: look-mid : treasure-mid-town-left : * : * -1
+R: look-mid : treasure-mid-town-right : * : * -1
+R: look-mid : treasure-right-town-left : * : * -1
+R: look-mid : treasure-right-town-mid : * : * -1
+
+R: look-right : treasure-left-town-mid : * : * -1
+R: look-right : treasure-left-town-right : * : * -1
+R: look-right : treasure-mid-town-left : * : * -1
+R: look-right : treasure-mid-town-right : * : * -1
+R: look-right : treasure-right-town-left : * : * -1
+R: look-right : treasure-right-town-mid : * : * -1
+
+R: arrive-right : treasure-left-town-mid : * : * -1000
+R: arrive-right : treasure-left-town-right : * : * 1
+R: arrive-right : treasure-mid-town-left : * : * -1000
+R: arrive-right : treasure-mid-town-right : * : * 1
+R: arrive-right : treasure-right-town-left : * : * 100
+R: arrive-right : treasure-right-town-mid : * : * 100
+
+R: arrive-mid : treasure-left-town-mid : * : * 1
+R: arrive-mid : treasure-left-town-right : * : * -1000
+R: arrive-mid : treasure-mid-town-left : * : * 100
+R: arrive-mid : treasure-mid-town-right : * : * 100
+R: arrive-mid : treasure-right-town-left : * : * -1000
+R: arrive-mid : treasure-right-town-mid : * : * 1
+
+R: arrive-left : treasure-left-town-mid : * : * 100
+R: arrive-left : treasure-left-town-right : * : * 100
+R: arrive-left : treasure-mid-town-left : * : * 1
+R: arrive-left : treasure-mid-town-right : * : * -1000
+R: arrive-left : treasure-right-town-left : * : * 1
+R: arrive-left : treasure-right-town-mid : * : * -1000

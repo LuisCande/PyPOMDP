@@ -12,6 +12,7 @@ class RunnerParams:
 		self.random_prior = random_prior
 		self.snapshot = snapshot
 		self.logfile = logfile
+		#New argument
 		self.benchmark = benchmark
 
 		# default params
